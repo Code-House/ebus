@@ -23,6 +23,9 @@ package org.code_house.ebus.api;
  */
 public interface PropertyValue<T> {
 
+    /**
+     * Special constant representing EMPTY value or no value at all.
+     */
     PropertyValue<Void> EMPTY = new PropertyValue<Void>() {
         @Override
         public Void getValue() {
@@ -30,6 +33,11 @@ public interface PropertyValue<T> {
         }
     };
 
+    /**
+     * Returns property value encoded to Java.
+     *
+     * @return Property value.
+     */
     T getValue();
 
 }

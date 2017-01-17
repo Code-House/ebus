@@ -19,13 +19,26 @@ import com.google.common.base.Predicate;
 
 import static org.code_house.ebus.api.Functions.*;
 
+/**
+ * Predicates defined below are defining detection logic for master/slave/broadcast. These predicates are defined in same
+ * way as they are described in specification. Currently IS_MASTER predicate allows 25 masters on the bus and their slaves
+ * as well. Slave detection is quite simple - whatever is not master, must be a slave address.
+ */
 public interface Predicates {
 
-    Predicate<Byte> IS_MASTER = address -> MASTER_INDEX.apply(HIGH.apply(address)) > 0 && MASTER_INDEX.apply(LOW.apply(address)) > 0;
+    /**
+     * Master detection logic.
+     */
+    Predicate<Byte> IS_MASTER = address -> masterIndex(priorityClass(address)) > 0 && masterIndex(subAddress(address)) > 0;
 
+    /**
+     * Slave detection logic.
+     */
     Predicate<Byte> IS_SLAVE = com.google.common.base.Predicates.not(IS_MASTER);
 
+    /**
+     * Broadcast detection logic.
+     */
     Predicate<Byte> IS_BROADCAST = address -> Constants.BROADCAST_ADDRESS == address;
-
 
 }
