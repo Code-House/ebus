@@ -16,6 +16,8 @@
 
 package org.code_house.ebus.netty.codec;
 
+import java.nio.ByteBuffer;
+
 /**
  * Crc8 algorithm authored by Christian Sowada.
  */
@@ -69,10 +71,9 @@ public class Crc8 {
         return crc;
     }
 
-    public static byte crc8(byte[] data, byte uc_crc) {
-        for (int i = 0; i < data.length; i++) {
-            byte b = data[i];
-            uc_crc = crc8_tab(b, uc_crc);
+    public static byte crc8(ByteBuffer data, byte uc_crc) {
+        for (int index = 0; index < data.capacity(); index++) {
+            uc_crc = crc8_tab(data.get(index), uc_crc);
         }
         return uc_crc;
     }

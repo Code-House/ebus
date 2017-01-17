@@ -40,6 +40,7 @@ import org.code_house.ebus.netty.codec.struct.SlaveHeader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayDeque;
 
 /**
@@ -139,9 +140,9 @@ public class OutboundEBusHandler extends ChannelDuplexHandler {
                                 ctx.write(new Rejection());
                             }
 
-                            byte[] reply = mapper.get().slave().encode(returnValue);
+                            ByteBuffer reply = mapper.get().slave().encode(returnValue);
                             // data should not exceed 16 bytes, so we're safe here
-                            ctx.write(new SlaveHeader((short) reply.length));
+                            ctx.write(new SlaveHeader((short) reply.capacity()));
                             ctx.write(new SlaveData(reply, (byte) 0, (byte) 0));
 
                         }

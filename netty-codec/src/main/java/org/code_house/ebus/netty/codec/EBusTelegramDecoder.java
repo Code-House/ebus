@@ -13,18 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.code_house.ebus.netty.codec;
 
-package org.code_house.ebus.netty.codec.struct;
-
-import java.nio.ByteBuffer;
+import io.netty.handler.codec.ByteToMessageDecoder;
 
 /**
+ * Common stuff for working with eBUS telegrams and their fragments.
+ *
  * @author Łukasz Dywicki &lt;luke@code-house.org&gt;
  */
-public interface Data extends Transmittable {
+public abstract class EBusTelegramDecoder extends ByteToMessageDecoder {
 
-    int getCrc();
-    ByteBuffer getData();
+    protected byte calculateCrc(byte... bytes) {
+        return calculateCrc0((byte) 0, bytes);
+    }
 
-    boolean isValid();
+    private byte calculateCrc0(byte crc, byte ... bytes) {
+        for (byte aByte : bytes) {
+            crc = Crc8.crc8_tab(aByte, crc);
+        }
+        return crc;
+    }
+
 }

@@ -19,16 +19,16 @@ package org.code_house.ebus.netty.codec;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufUtil;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.ByteToMessageDecoder;
 import org.code_house.ebus.api.Constants;
 import org.code_house.ebus.netty.codec.struct.Confirmation;
 import org.code_house.ebus.netty.codec.struct.Rejection;
 import org.code_house.ebus.netty.codec.struct.SlaveData;
 import org.code_house.ebus.netty.codec.struct.SlaveHeader;
 
+import java.nio.ByteBuffer;
 import java.util.List;
 
-public class SlaveTelegramDecoder extends ByteToMessageDecoder {
+public class SlaveTelegramDecoder extends EBusTelegramDecoder {
 
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
@@ -44,8 +44,9 @@ public class SlaveTelegramDecoder extends ByteToMessageDecoder {
             if (ack == Constants.ACK) { // slave confirmed received data
                 byte length = in.readByte();
                 if (in.readableBytes() >= length + 1 /* crc */) {
-                    byte[] exchange = new byte[length];
-                    in.readBytes(exchange, 0, length);
+                    ByteBuffer exchange = ByteBuffer.allocate(length);
+                    in.getBytes(in.readerIndex(), exchange);
+                    in.skipBytes(length);
                     byte crc = in.readByte();
                     SlaveData data = new SlaveData(exchange, calculateCrc(length), crc);
                     if (data.isValid()) {
@@ -71,17 +72,6 @@ public class SlaveTelegramDecoder extends ByteToMessageDecoder {
         if (in.readableBytes() > 0) {
             out.add(in.readBytes(super.actualReadableBytes()));
         }
-    }
-
-    private byte calculateCrc(byte ... bytes) {
-        return calculateCrc0((byte) 0, bytes);
-    }
-
-    private byte calculateCrc0(byte crc, byte ... bytes) {
-        for (byte aByte : bytes) {
-            crc = Crc8.crc8_tab(aByte, crc);
-        }
-        return crc;
     }
 
 

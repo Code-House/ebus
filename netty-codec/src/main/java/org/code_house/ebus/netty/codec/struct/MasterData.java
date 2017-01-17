@@ -18,6 +18,8 @@ package org.code_house.ebus.netty.codec.struct;
 
 import org.code_house.ebus.netty.codec.Crc8;
 
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 /**
@@ -27,11 +29,11 @@ import java.util.Arrays;
  */
 public class MasterData implements Data {
 
-    private final byte[] data;
+    private final ByteBuffer data;
     private final byte initCrc;
     private final byte crc;
 
-    public MasterData(byte[] data, byte initCrc, byte crc) {
+    public MasterData(ByteBuffer data, byte initCrc, byte crc) {
         this.data = data;
         this.initCrc = initCrc;
         this.crc = crc;
@@ -43,7 +45,7 @@ public class MasterData implements Data {
     }
 
     @Override
-    public byte[] getData() {
+    public ByteBuffer getData() {
         return data;
     }
 
@@ -54,6 +56,6 @@ public class MasterData implements Data {
 
     @Override
     public String toString() {
-        return "Master Data " + Arrays.toString(data) + "(" + crc + ")";
+        return "Master Data " + StandardCharsets.UTF_8.decode(data) + "(" + crc + ")";
     }
 }

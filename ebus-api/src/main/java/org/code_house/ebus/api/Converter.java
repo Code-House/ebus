@@ -15,13 +15,29 @@
  */
 package org.code_house.ebus.api;
 
+import java.nio.ByteBuffer;
+
 /**
  * Allows to convert values from ebus to java and vice versa.
+ *
+ * @author Łukasz Dywicki &lt;luke@code-house.org&gt;
  */
 public interface Converter<T> {
 
-    byte[] encode(PropertyValue<T> propertyValue);
+    /**
+     * Convert value represented by java structure into telegram data payload.
+     *
+     * @param propertyValue Property to be converted.
+     * @return Byte buffer representing property value.
+     */
+    ByteBuffer encode(PropertyValue<T> propertyValue);
 
-    PropertyValue<T> decode(byte[] value);
+    /**
+     * Convert byte sequence from telegram into object form.
+     *
+     * @param value Byte representation of value.
+     * @return Property value representing byte sequence.
+     */
+    PropertyValue<T> decode(ByteBuffer value);
 
 }

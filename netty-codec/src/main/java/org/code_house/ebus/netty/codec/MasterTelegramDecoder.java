@@ -23,9 +23,10 @@ import org.code_house.ebus.api.Predicates;
 import org.code_house.ebus.netty.codec.struct.MasterData;
 import org.code_house.ebus.netty.codec.struct.MasterHeader;
 
+import java.nio.ByteBuffer;
 import java.util.List;
 
-public class MasterTelegramDecoder extends ByteToMessageDecoder {
+public class MasterTelegramDecoder extends EBusTelegramDecoder {
 
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
@@ -54,8 +55,9 @@ public class MasterTelegramDecoder extends ByteToMessageDecoder {
                 byte length = in.readByte();
 
                 if (in.readableBytes() >= length + 1 /* crc */) {
-                    byte[] exchange = new byte[length];
-                    in.readBytes(exchange, 0, length);
+                    ByteBuffer exchange = ByteBuffer.allocate(length);
+                    in.getBytes(in.readerIndex(), exchange);
+                    in.skipBytes(length);
                     byte crc = in.readByte();
 
                     MasterData data = new MasterData(exchange, calculateCrc((byte) source, (byte) destination, commandGroup, command, length), crc);
@@ -78,18 +80,6 @@ public class MasterTelegramDecoder extends ByteToMessageDecoder {
             out.add(in.readBytes(super.actualReadableBytes()));
         }
     }
-
-    private byte calculateCrc(byte ... bytes) {
-        return calculateCrc0((byte) 0, bytes);
-    }
-
-    private byte calculateCrc0(byte crc, byte ... bytes) {
-        for (byte aByte : bytes) {
-            crc = Crc8.crc8_tab(aByte, crc);
-        }
-        return crc;
-    }
-
 
 }
 

@@ -16,8 +16,11 @@
 
 package org.code_house.ebus.netty.codec.struct;
 
+import io.netty.buffer.ByteBuf;
 import org.code_house.ebus.netty.codec.Crc8;
 
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 /**
@@ -25,11 +28,11 @@ import java.util.Arrays;
  */
 public class SlaveData implements Data {
 
-    private final byte[] data;
+    private final ByteBuffer data;
     private final byte initCrc;
     private final byte crc;
 
-    public SlaveData(byte[] data, byte initCrc, byte crc) {
+    public SlaveData(ByteBuffer data, byte initCrc, byte crc) {
         this.data = data;
         this.initCrc = initCrc;
         this.crc = crc;
@@ -41,7 +44,7 @@ public class SlaveData implements Data {
     }
 
     @Override
-    public byte[] getData() {
+    public ByteBuffer getData() {
         return data;
     }
 
@@ -52,6 +55,6 @@ public class SlaveData implements Data {
 
     @Override
     public String toString() {
-        return "Slave Data " + Arrays.toString(data) + "(" + crc + ")";
+        return "Slave Data " + StandardCharsets.UTF_8.decode(data) + "(" + crc + ")";
     }
 }

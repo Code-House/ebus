@@ -20,9 +20,8 @@
 
     <groupId>org.code-house.ebus</groupId>
     <artifactId>ebus</artifactId>
-    <packaging>pom</packaging>
-
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <name>EBus</name>
     <description>Maven aggregate for building all modules.</description>
