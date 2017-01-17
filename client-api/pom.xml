@@ -26,15 +26,15 @@
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
-    <artifactId>client-common</artifactId>
-    <name>EBus :: Client :: Common</name>
+    <artifactId>client-api</artifactId>
 
-    <description>Shared code between client implementations.</description>
+    <name>EBus :: Client API</name>
+    <description>Client api definition.</description>
 
     <dependencies>
         <dependency>
             <groupId>org.code-house.ebus</groupId>
-            <artifactId>client-api</artifactId>
+            <artifactId>ebus-api</artifactId>
         </dependency>
     </dependencies>
 

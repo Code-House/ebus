@@ -34,7 +34,7 @@
     <dependencies>
         <dependency>
             <groupId>org.code-house.ebus</groupId>
-            <artifactId>api</artifactId>
+            <artifactId>client-api</artifactId>
         </dependency>
         <dependency>
             <groupId>org.code-house.ebus</groupId>

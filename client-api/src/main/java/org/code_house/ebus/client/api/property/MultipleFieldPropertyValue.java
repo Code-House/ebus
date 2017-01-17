@@ -13,28 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.code_house.ebus.client.common.event;
 
-import org.code_house.ebus.client.api.Device;
-import org.code_house.ebus.client.api.PropertyName;
+package org.code_house.ebus.client.api.property;
+
 import org.code_house.ebus.api.PropertyValue;
-import org.code_house.ebus.client.api.event.PushEvent;
+
+import java.util.Map;
 
 /**
- * Created by splatch on 16.01.2017.
+ * An special type of property value which is backed by Map, this allows to retrieve or update multiple fields within one
+ * request.
+ *
+ * @param <K> Key type.
+ * @param <V> Value type.
  */
-public class DevicePushEvent extends PropertyEventBase implements PushEvent {
+public interface MultipleFieldPropertyValue<K, V> extends PropertyValue<Map<K, V>> {
 
-    private final Device destination;
-
-    public DevicePushEvent(Device source, Device destination, PropertyName name, PropertyValue value) {
-        super(source, name, value);
-        this.destination = destination;
-    }
-
-    @Override
-    public Device getDestination() {
-        return destination;
-    }
+    /**
+     * Returns an field which is embedded master property value.
+     *
+     * @param key Key of sub-property value.
+     * @param type Expected type of value kept master
+     * @param <T> Type of return value.
+     * @return Value of property field.
+     */
+    <T> T get(String key, Class<T> type);
 
 }

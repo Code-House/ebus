@@ -15,10 +15,10 @@
  */
 package org.code_house.ebus.client.common.event;
 
-import org.code_house.ebus.Device;
-import org.code_house.ebus.PropertyName;
+import org.code_house.ebus.client.api.Device;
+import org.code_house.ebus.client.api.PropertyName;
 import org.code_house.ebus.api.PropertyValue;
-import org.code_house.ebus.event.Broadcast;
+import org.code_house.ebus.client.api.event.Broadcast;
 
 public class BroadcastEvent extends PropertyEventBase implements Broadcast {
 

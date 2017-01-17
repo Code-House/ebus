@@ -13,22 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.code_house.ebus.client.common;
 
-import org.code_house.ebus.client.api.Device;
-import org.code_house.ebus.client.api.event.Event;
+package org.code_house.ebus.client.api;
 
-public abstract class EventBase implements Event {
+import org.code_house.ebus.api.Command;
 
-    private final Device source;
+/**
+ * Represents both human-readable and EBus understandable name of property.
+ */
+public interface PropertyName<T, R> {
 
-    public EventBase(Device source) {
-        this.source = source;
-    }
+    /**
+     * Returns human readable property identifier.
+     *
+     * @return String property identifier.
+     */
+    String getName();
 
-    @Override
-    public Device getSource() {
-        return source;
-    }
+    /**
+     * Returns EBus understandable property identifier.
+     *
+     * @return Two byte property identifier.
+     */
+    Command<T, R> getCommand();
 
 }

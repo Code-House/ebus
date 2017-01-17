@@ -13,22 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.code_house.ebus.client.common;
 
-import org.code_house.ebus.client.api.Device;
-import org.code_house.ebus.client.api.event.Event;
+package org.code_house.ebus.client.api.event;
 
-public abstract class EventBase implements Event {
+/**
+ * Push event is an event type which is emitted master case of communication without return value. In case of ebus it is a
+ * case for master-master exchanges.
+ */
+public interface PushEvent extends EventWithDestination, PropertyEvent {
 
-    private final Device source;
-
-    public EventBase(Device source) {
-        this.source = source;
-    }
-
-    @Override
-    public Device getSource() {
-        return source;
-    }
 
 }

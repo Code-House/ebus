@@ -13,22 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.code_house.ebus.client.common;
 
-import org.code_house.ebus.client.api.Device;
-import org.code_house.ebus.client.api.event.Event;
+package org.code_house.ebus.client.api.device;
 
-public abstract class EventBase implements Event {
+import org.code_house.ebus.api.Command;
 
-    private final Device source;
+public class UnsupportedCommandException extends CommandException {
 
-    public EventBase(Device source) {
-        this.source = source;
-    }
-
-    @Override
-    public Device getSource() {
-        return source;
+    public UnsupportedCommandException(Command command, String message) {
+        super(command, message);
     }
 
 }

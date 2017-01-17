@@ -18,11 +18,11 @@ package org.code_house.ebus.example;
 
 import org.code_house.ebus.api.Command;
 import org.code_house.ebus.api.PropertyValue;
-import org.code_house.ebus.device.EBusDevice;
-import org.code_house.ebus.device.UnsupportedCommandException;
+import org.code_house.ebus.client.api.device.EBusDevice;
+import org.code_house.ebus.client.api.device.UnsupportedCommandException;
 import org.code_house.ebus.example.cmd.TemperaturePropertyValue;
-import org.code_house.ebus.participant.Master;
-import org.code_house.ebus.participant.Slave;
+import org.code_house.ebus.client.api.participant.Master;
+import org.code_house.ebus.client.api.participant.Slave;
 
 /**
  * Basic regulator device which is passive, meaning does not emmit anything to bus directly but just send reply for requests.

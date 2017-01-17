@@ -13,22 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.code_house.ebus.client.common;
+
+package org.code_house.ebus.client.api.event;
 
 import org.code_house.ebus.client.api.Device;
-import org.code_house.ebus.client.api.event.Event;
 
-public abstract class EventBase implements Event {
+/**
+ * Universal type for representing events which have source and destination addresses.
+ */
+public interface EventWithDestination extends Event {
 
-    private final Device source;
-
-    public EventBase(Device source) {
-        this.source = source;
-    }
-
-    @Override
-    public Device getSource() {
-        return source;
-    }
+    /**
+     * Destination of an event.
+     *
+     * @return Destination device.
+     */
+    Device getDestination();
 
 }

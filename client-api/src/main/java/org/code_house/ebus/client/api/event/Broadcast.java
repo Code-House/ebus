@@ -13,22 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.code_house.ebus.client.common;
 
-import org.code_house.ebus.client.api.Device;
-import org.code_house.ebus.client.api.event.Event;
+package org.code_house.ebus.client.api.event;
 
-public abstract class EventBase implements Event {
-
-    private final Device source;
-
-    public EventBase(Device source) {
-        this.source = source;
-    }
-
-    @Override
-    public Device getSource() {
-        return source;
-    }
+/**
+ * Broadcast event is an event which holds name, value and it is desired to be received by all bus participants.
+ */
+public interface Broadcast extends Event, PropertyEvent {
 
 }

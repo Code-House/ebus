@@ -15,12 +15,12 @@
  */
 package org.code_house.ebus.client.common.event;
 
-import org.code_house.ebus.Device;
-import org.code_house.ebus.Property;
-import org.code_house.ebus.PropertyName;
+import org.code_house.ebus.client.api.Device;
+import org.code_house.ebus.client.api.Property;
+import org.code_house.ebus.client.api.PropertyName;
 import org.code_house.ebus.api.PropertyValue;
 import org.code_house.ebus.client.common.EventBase;
-import org.code_house.ebus.event.PropertyEvent;
+import org.code_house.ebus.client.api.event.PropertyEvent;
 
 public abstract class PropertyEventBase extends EventBase implements PropertyEvent {
 

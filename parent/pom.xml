@@ -51,7 +51,7 @@
         <dependencies>
             <dependency>
                 <groupId>org.code-house.ebus</groupId>
-                <artifactId>api</artifactId>
+                <artifactId>client-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

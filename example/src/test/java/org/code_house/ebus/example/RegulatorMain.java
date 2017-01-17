@@ -17,7 +17,7 @@
 package org.code_house.ebus.example;
 
 import org.code_house.ebus.api.PropertyValue;
-import org.code_house.ebus.device.UnsupportedCommandException;
+import org.code_house.ebus.client.api.device.UnsupportedCommandException;
 import org.code_house.ebus.example.cmd.TemperaturePropertyValue;
 import org.junit.jupiter.api.Test;
 
