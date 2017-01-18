@@ -26,7 +26,7 @@ public interface PropertyValue<T> {
     /**
      * Special constant representing EMPTY value or no value at all.
      */
-    PropertyValue<Void> EMPTY = new PropertyValue<Void>() {
+    PropertyValue EMPTY = new PropertyValue<Void>() {
         @Override
         public Void getValue() {
             return null;
