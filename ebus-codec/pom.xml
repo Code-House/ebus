@@ -29,5 +29,15 @@
     <artifactId>ebus-codec</artifactId>
     <name>EBus :: Codec</name>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.code-house.ebus</groupId>
+            <artifactId>ebus-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.code-house.ebus</groupId>
+            <artifactId>ebus-common</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

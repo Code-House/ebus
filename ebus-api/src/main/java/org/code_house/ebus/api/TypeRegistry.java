@@ -13,10 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.code_house.ebus.codec;
+package org.code_house.ebus.api;
 
+/**
+ * Type registry allows to define dynamically type table used for decoding telegram parts.
+ */
 public interface TypeRegistry {
 
-    
+    /**
+     * Lookup converter for given type name.
+     *
+     * @param name Name of type such data1c.
+     * @param <X> Expected java type representation.
+     * @return Type converter or null.
+     */
+    <X> Converter<X> getType(String name);
 
 }
