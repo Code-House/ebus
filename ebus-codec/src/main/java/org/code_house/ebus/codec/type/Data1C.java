@@ -16,9 +16,7 @@
 
 package org.code_house.ebus.codec.type;
 
-import org.code_house.ebus.api.Converter;
-import org.code_house.ebus.api.PropertyValue;
-import org.code_house.ebus.common.ScalarPropertyValue;
+import org.code_house.ebus.api.Type;
 
 import java.nio.ByteBuffer;
 
@@ -43,29 +41,35 @@ import java.nio.ByteBuffer;
  *
  * @author Łukasz Dywicki &lt;luke@code-house.org&gt;
  */
-public class Data1C implements Converter<Float> {
+public class Data1C implements Type<Float> {
 
     /**
      * Replacement value/special value.
      */
-    public static final ByteBuffer REPLACEMENT_VALUE = ByteBuffer.allocate(1).put((byte) 0xFF);
+    private static final byte[] REPLACEMENT_VALUE = new byte[] {(byte) 0xFF};
 
     @Override
-    public ByteBuffer encode(PropertyValue<Float> propertyValue) {
-        short value = propertyValue.getValue().shortValue();
+    public byte[] encode(Float value) {
         if (value >= 0 && value <= 100) {
-            return ByteBuffer.allocate(1).put((byte) (value * 2));
+            // todo check resolution of type and compatibility of coding
+            return new byte[] {value.byteValue()};
         }
+
         return REPLACEMENT_VALUE;
     }
 
     @Override
-    public PropertyValue<Float> decode(ByteBuffer value) {
-        if (REPLACEMENT_VALUE.equals(value)) {
-            return PropertyValue.EMPTY;
+    public Float decode(byte[] value) {
+        if (REPLACEMENT_VALUE.equals(value[0])) {
+            return null;
         }
 
-        return new ScalarPropertyValue<>(new Float(new Short(value.get())) / 2);
+        return new Float(new Short(value[0])) / 2;
     }
 
+
+    @Override
+    public short getSize() {
+        return 1;
+    }
 }

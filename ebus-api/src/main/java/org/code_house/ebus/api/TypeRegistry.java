@@ -27,6 +27,6 @@ public interface TypeRegistry {
      * @param <X> Expected java type representation.
      * @return Type converter or null.
      */
-    <X> Converter<X> getType(String name);
+    <X> Type<X> getType(String name);
 
 }
