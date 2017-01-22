@@ -21,8 +21,8 @@ import org.code_house.ebus.api.Command;
 import org.code_house.ebus.api.PropertyValue;
 
 /**
- * An extension of Device type which can be used to implement devices which can participate master communication, not just
- * represent an physical (or logical) entity.
+ * An extension of Device type which can be used to implement devices which can participate in communication over bus.
+ * This might be represent an physical (or logical) entity.
  */
 public interface EBusDevice extends Device {
 

@@ -112,4 +112,15 @@ public final class Functions {
         return (byte) (address > 250 ? (address - 256) + 5 : address + 5);
     }
 
+    /**
+     * Calculate master address of passed slave address. Be aware that this utility does not check is passed address is
+     * valid slave.
+     *
+     * @param address Slave address.
+     * @return Master address.
+     */
+    public static byte master(byte address) {
+        return (byte) (address < 250 ? address +5 : (address - 256 ) + 5);
+    }
+
 }
