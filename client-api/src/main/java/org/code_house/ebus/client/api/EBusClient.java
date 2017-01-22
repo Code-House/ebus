@@ -27,8 +27,8 @@ import java.util.concurrent.Future;
  */
 public interface EBusClient {
 
-    void connect();
-    void disconnect();
+    void connect() throws EBusClientException;
+    void disconnect() throws EBusClientException;
 
     //ListenableFuture<List<Device>> discover();
 
